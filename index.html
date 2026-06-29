@@ -2,42 +2,51 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Kuis Lambang Provinsi Indonesia</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        /* --- PROTEKSI TEKS & RESET DASAR --- */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: 'Fredoka', 'Segoe UI', sans-serif;
+            /* Mencegah seleksi teks di semua browser */
             user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -webkit-touch-callout: none; /* Mencegah menu pop-up saat sentuh lama di mobile */
         }
 
         body {
             background-color: #d2f4ff;
-            background-position: 0 0, 15px 15px;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             color: #3c3c3c;
+            overflow: hidden;
+            padding: 10px;
         }
 
-        /* Container Game ala Smartphone Modern */
+        /* --- CONTAINER GAME DENGAN RASIO 9:16 PROPORSIONAL --- */
         .game-container {
             width: 100%;
-            max-width: 450px;
-            height: 100vh;
-            max-height: 820px;
+            /* Mengunci aspek rasio ke 9:16 secara dinamis */
+            aspect-ratio: 9 / 16; 
+            /* Memastikan container muat dan proporsional di layar tinggi maupun lebar */
+            max-height: calc(100vh - 20px);
+            max-width: calc((100vh - 20px) * 9 / 16);
             background-color: #ffffff;
             box-shadow: 0 16px 40px rgba(13, 110, 253, 0.15);
             display: flex;
             flex-direction: column;
             overflow: hidden;
             position: relative;
-            border-radius: 32px;
-            border: 8px solid #ffffff;
+            border-radius: 24px;
+            border: 6px solid #ffffff;
         }
 
         .screen {
@@ -52,125 +61,124 @@
             display: flex;
         }
 
-        /* --- 1. MENU UTAMA STYLING (Gaya Ceria & Colorful) --- */
+        /* --- 1. MENU UTAMA STYLING --- */
         #menu-screen {
             background-image: url(logo/bg.png);
             background-size: contain;
             color: white;
             justify-content: flex-end;
             align-items: center;
-            padding: 20px;
+            padding: 25px;
             text-align: center;
         }
 
         #menu-screen h1 {
-            font-size: 3.2rem;
-            margin-bottom: 15px;
+            font-size: 2.8rem;
+            margin-bottom: 12px;
             color: #fff;
-            text-shadow: 0 6px 0px #008b94, 0 8px 15px rgba(0,0,0,0.2);
+            text-shadow: 0 5px 0px #008b94, 0 6px 12px rgba(0,0,0,0.2);
             letter-spacing: 1px;
         }
 
         #menu-screen p {
-            font-size: 1.1rem;
-            margin-bottom: 50px;
+            font-size: 1rem;
+            margin-bottom: 40px;
             line-height: 1.5;
             font-weight: 600;
             color: #f0faff;
             text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        /* Tombol 3D Menggemaskan */
         .btn-primary {
             background-color: #ffc107;
             color: #523b00;
             border: none;
-            padding: 18px 60px;
-            font-size: 1.6rem;
+            padding: 14px 45px;
+            font-size: 1.4rem;
             font-weight: 700;
             border-radius: 25px;
             cursor: pointer;
-            box-shadow: 0 8px 0px #dca200, 0 12px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 6px 0px #dca200, 0 10px 15px rgba(0,0,0,0.15);
             transition: all 0.1s ease;
         }
 
         .btn-primary:active {
-            transform: translateY(6px);
-            box-shadow: 0 2px 0px #dca200, 0 4px 10px rgba(0,0,0,0.15);
+            transform: translateY(4px);
+            box-shadow: 0 2px 0px #dca200, 0 4px 8px rgba(0,0,0,0.15);
         }
 
         /* --- 2. GAMEPLAY STYLING --- */
         header {
             background: #ffffff;
-            padding: 15px;
+            padding: 12px;
             text-align: center;
         }
 
         header h2 {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: #00b4d8;
             font-weight: 700;
         }
 
-        /* Status Bar Cantik dengan Efek Kapsul */
         .status-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             background-color: #f1f9ff;
-            padding: 10px 24px;
-            font-size: 1rem;
+            padding: 8px 20px;
+            font-size: 0.95rem;
             font-weight: 700;
-            border-radius: 20px;
-            margin: 0 15px 10px 15px;
+            border-radius: 16px;
+            margin: 0 12px 10px 12px;
             border: 2px solid #e2f2ff;
             color: #4a5568;
         }
 
         .status-bar span {
             color: #ff9f1c;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
 
-        /* Frame Menampilkan Lambang (Sangat Bersih & Menonjol) */
+        /* Frame Menampilkan Lambang */
         .lambang-display {
             flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
             background-color: #ffffff;
-            padding: 5px;
-            margin: 0 10px 10px 10px;
+            padding: 10px;
+            margin: 0 12px 12px 12px;
             border-radius: 20px;
-            border: 2px solid red;
+            border: 4px solid #f0f4f8;
             box-shadow: inset 0 4px 10px rgba(0,0,0,0.02);
+            overflow: hidden;
         }
 
         .lambang-display img {
             max-width: 90%;
-            max-height: 180px;
+            max-height: 100%;
             object-fit: contain;
             filter: drop-shadow(0 4px 8px rgba(0,0,0,0.06));
         }
 
         /* Papan Pilihan Jawaban Dua Kolom */
         .quiz-board {
-            background-color: skyblue;
-            padding: 16px;
+            background-color: #f7f9fc;
+            padding: 12px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
+            gap: 10px;
+            border-top-left-radius: 24px;
+            border-top-right-radius: 24px;
             border-top: 4px solid #edf2f7;
         }
 
         .column-title {
             text-align: center;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 700;
-            color: blue;
-            margin-bottom: 10px;
+            color: #a0aec0;
+            margin-bottom: 8px;
             text-shadow: 0 1px 0px #fff;
         }
 
@@ -184,36 +192,34 @@
         .option-card {
             background-color: #ffffff;
             border: 3px solid #e2e8f0;
-            border-radius: 18px;
-            padding: 12px 8px;
+            border-radius: 16px;
+            padding: 10px 6px;
             text-align: center;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 700;
             color: #4a5568;
             cursor: pointer;
-            box-shadow: 0 5px 0px #e2e8f0;
+            box-shadow: 0 4px 0px #e2e8f0;
             transition: all 0.1s ease;
             word-break: break-word;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 60px;
+            min-height: 52px;
         }
 
-        /* State Interaksi & Hasil Game */
         .option-card.selected {
             background-color: #e3f2fd;
             border-color: #3182ce;
             color: #2b6cb0;
-            box-shadow: 0 5px 0px #2b6cb0;
+            box-shadow: 0 4px 0px #2b6cb0;
         }
 
         .option-card.correct {
-            background-color: #eccfff;
             background: linear-gradient(180deg, #98eff9 0%, #5ce1e6 100%);
             border-color: #00a8b5;
             color: #005a61;
-            box-shadow: 0 5px 0px #00828c;
+            box-shadow: 0 4px 0px #00828c;
             animation: popCheck 0.3s ease;
         }
 
@@ -221,16 +227,15 @@
             background-color: #fee2e2;
             border-color: #e53e3e;
             color: #9b2c2c;
-            box-shadow: 0 5px 0px #9b2c2c;
+            box-shadow: 0 4px 0px #9b2c2c;
         }
 
         @keyframes popCheck {
             0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.03); }
             100% { transform: scale(1); }
         }
 
-        /* Menyembunyikan tombol submit bawaan */
         .action-area {
             display: none;
         }
@@ -240,37 +245,37 @@
             background-color: #ffffff;
             justify-content: center;
             align-items: center;
-            padding: 40px 30px;
+            padding: 30px 20px;
             text-align: center;
         }
 
         #result-screen h2 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             color: #00c2cb;
             margin-bottom: 5px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
         .score-display {
-            font-size: 5.5rem;
+            font-size: 4.5rem;
             font-weight: 700;
             color: #ff9f1c;
-            text-shadow: 0 6px 0px #f37a00;
-            margin: 25px 0 35px 0;
+            text-shadow: 0 5px 0px #f37a00;
+            margin: 20px 0 30px 0;
             background: #fff9f0;
-            width: 160px;
-            height: 160px;
+            width: 130px;
+            height: 130px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            border: 6px dashed #ffe3bc;
+            border: 5px dashed #ffe3bc;
         }
 
         #result-screen p {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #718096;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             font-weight: 600;
             padding: 0 10px;
         }
@@ -278,26 +283,26 @@
         .btn-group {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
             width: 100%;
-            max-width: 280px;
+            max-width: 240px;
         }
 
         .btn-secondary {
             background-color: #edf2f7;
             color: #4a5568;
             border: none;
-            padding: 14px 30px;
-            font-size: 1.2rem;
+            padding: 12px 25px;
+            font-size: 1.1rem;
             font-weight: 700;
-            border-radius: 20px;
+            border-radius: 18px;
             cursor: pointer;
-            box-shadow: 0 6px 0px #cbd5e0;
+            box-shadow: 0 5px 0px #cbd5e0;
             transition: all 0.1s ease;
         }
 
         .btn-secondary:active {
-            transform: translateY(4px);
+            transform: translateY(3px);
             box-shadow: 0 2px 0px #cbd5e0;
         }
     </style>
@@ -356,6 +361,28 @@
     </div>
 
     <script>
+        /* --- PROTEKSI ANTI KLIK KANAN, COPY, DAN INSPEKSI ELEMENT --- */
+        // Mencegah Klik Kanan (Context Menu)
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Mencegah Menyalin Teks (Copy)
+        document.addEventListener('copy', function(e) {
+            e.preventDefault();
+        });
+
+        // Mencegah Tombol Pintasan Keyboard (F12, Ctrl+Shift+I, Ctrl+Shift+C, Ctrl+U)
+        document.addEventListener('keydown', function(e) {
+            if (
+                e.key === 'F12' || 
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'C' || e.key === 'J')) || 
+                (e.ctrlKey && e.key === 'u')
+            ) {
+                e.preventDefault();
+            }
+        });
+
         // DATABASE LENGKAP 38 PROVINSI DI INDONESIA
         const database38Provinsi = [
             { id: 1, lambang: "logo/aceh.png", provinsi: "Aceh", ibukota: "Banda Aceh" },
@@ -405,7 +432,6 @@
         let pilihanTerpilih = { provinsi: null, ibukota: null };
         let isStateMengecek = false;
 
-        // Fungsi Helper Pengacak Array (Fisher-Yates)
         function shuffle(array) {
             let currentIndex = array.length, randomIndex;
             while (currentIndex != 0) {
@@ -416,13 +442,11 @@
             return array;
         }
 
-        // Navigasi Layar
         function changeScreen(screenId) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(screenId).classList.add('active');
         }
 
-        // Mulai Game
         function startGame() {
             skor = 0;
             indeksSoal = 0;
@@ -432,7 +456,6 @@
             loadQuestion();
         }
 
-        // Muat Data Soal
         function loadQuestion() {
             pilihanTerpilih = { provinsi: null, ibukota: null };
             isStateMengecek = false;
@@ -442,11 +465,10 @@
 
             const itemBenar = sesiKuis[indeksSoal];
             
-            // KONDISI SOAL TAMPIL: Mengubah nama file gambar asli menjadi versi blur (menambahkan '(2)')
+            // Mengubah nama file gambar asli menjadi versi blur (menambahkan '(2)')
             const namaGambarBlur = itemBenar.lambang.replace(".png", "(2).png");
             document.getElementById('lambang-image').src = namaGambarBlur;
 
-            // Generator Pilihan (1 Benar + 3 Pengecoh)
             const databasePengecoh = database38Provinsi.filter(p => p.id !== itemBenar.id);
             const acakPengecoh = shuffle([...databasePengecoh]).slice(0, 3);
             const EmpatPilihanRaw = [itemBenar, ...acakPengecoh];
@@ -454,14 +476,12 @@
             const opsiProvinsi = shuffle([...EmpatPilihanRaw]);
             const opsiIbukota = shuffle([...EmpatPilihanRaw]);
 
-            // Render Kolom Provinsi
             const containerProvinsi = document.getElementById('col-provinsi-options');
             containerProvinsi.innerHTML = '';
             opsiProvinsi.forEach(item => {
                 containerProvinsi.appendChild(createOptionCard(item.provinsi, item.id, 'provinsi'));
             });
 
-            // Render Kolom Ibukota
             const containerIbukota = document.getElementById('col-ibukota-options');
             containerIbukota.innerHTML = '';
             opsiIbukota.forEach(item => {
@@ -469,7 +489,6 @@
             });
         }
 
-        // Membuat Card Opsi Jawaban
         function createOptionCard(text, id, type) {
             const card = document.createElement('div');
             card.className = 'option-card';
@@ -483,15 +502,14 @@
                 siblings.forEach(s => {
                     s.classList.remove('selected');
                     s.style.transform = 'none';
-                    s.style.boxShadow = '0 5px 0px #e2e8f0';
+                    s.style.boxShadow = '0 4px 0px #e2e8f0';
                 });
 
                 card.classList.add('selected');
                 card.style.transform = 'translateY(4px)';
-                card.style.boxShadow = '0 1px 0px #2b6cb0';
+                card.style.boxShadow = '0 0px 0px #2b6cb0';
                 pilihanTerpilih[type] = card;
 
-                // Jika kedua bagian sudah dipilih, langsung eksekusi penilaian instan
                 if (pilihanTerpilih.provinsi && pilihanTerpilih.ibukota) {
                     periksaJawabanOtomatis();
                 }
@@ -500,13 +518,12 @@
             return card;
         }
 
-        // Sistem Penilaian Otomatis Instan Berjeda
         function periksaJawabanOtomatis() {
             isStateMengecek = true;
 
             const itemBenar = sesiKuis[indeksSoal];
             
-            // KONDISI SUDAH DIJAWAB BENAR/SALAH: Ganti gambar blur kembali ke gambar asli (tanpa blur)
+            // Ganti gambar blur kembali ke gambar asli (tanpa blur)
             document.getElementById('lambang-image').src = itemBenar.lambang;
 
             const idProvinsiTerpilih = parseInt(pilihanTerpilih.provinsi.dataset.id);
@@ -515,35 +532,31 @@
             let isProvinsiBenar = (idProvinsiTerpilih === itemBenar.id);
             let isIbukotaBenar = (idIbukotaTerpilih === itemBenar.id);
 
-            // Tampilkan Feedback Visual Kolom Provinsi
             pilihanTerpilih.provinsi.classList.remove('selected');
             if (isProvinsiBenar) {
                 pilihanTerpilih.provinsi.classList.add('correct');
-                pilihanTerpilih.provinsi.style.boxShadow = '0 5px 0px #00828c';
+                pilihanTerpilih.provinsi.style.boxShadow = '0 4px 0px #00828c';
             } else {
                 pilihanTerpilih.provinsi.classList.add('wrong');
-                pilihanTerpilih.provinsi.style.boxShadow = '0 5px 0px #9b2c2c';
+                pilihanTerpilih.provinsi.style.boxShadow = '0 4px 0px #9b2c2c';
                 highlightCorrectOption('col-provinsi-options', itemBenar.id);
             }
 
-            // Tampilkan Feedback Visual Kolom Ibukota
             pilihanTerpilih.ibukota.classList.remove('selected');
             if (isIbukotaBenar) {
                 pilihanTerpilih.ibukota.classList.add('correct');
-                pilihanTerpilih.ibukota.style.boxShadow = '0 5px 0px #00828c';
+                pilihanTerpilih.ibukota.style.boxShadow = '0 4px 0px #00828c';
             } else {
                 pilihanTerpilih.ibukota.classList.add('wrong');
-                pilihanTerpilih.ibukota.style.boxShadow = '0 5px 0px #9b2c2c';
+                pilihanTerpilih.ibukota.style.boxShadow = '0 4px 0px #9b2c2c';
                 highlightCorrectOption('col-ibukota-options', itemBenar.id);
             }
 
-            // Tambah Skor jika mutlak benar keduanya
             if (isProvinsiBenar && isIbukotaBenar) {
                 skor += 10;
                 document.getElementById('current-score').innerText = skor;
             }
 
-            // Jeda otomatis 1.2 Detik sebelum beralih/selesai
             setTimeout(() => {
                 indeksSoal++;
                 if (indeksSoal < 10) {
@@ -559,12 +572,11 @@
             options.forEach(opt => {
                 if (parseInt(opt.dataset.id) === correctId) {
                     opt.classList.add('correct');
-                    opt.style.boxShadow = '0 5px 0px #00828c';
+                    opt.style.boxShadow = '0 4px 0px #00828c';
                 }
             });
         }
 
-        // Layar Skor Akhir
         function showFinalResult() {
             changeScreen('result-screen');
             document.getElementById('final-score').innerText = skor;
